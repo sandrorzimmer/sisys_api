@@ -1,7 +1,11 @@
+#from typing_extensions import Required
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
+from django.conf import settings
+from django.utils import timezone
+from requests import request
 
 
 class UserProfileManager(BaseUserManager):
@@ -54,3 +58,32 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         """Return string representation of user"""
         return self.email
+
+
+class Tag(models.Model):
+    """Tags to be linked to info"""
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    text = models.CharField(max_length=128)
+
+    def __str__(self):
+        """Return model as a string"""
+        return f'{self.owner} - {self.text}'
+
+
+class Info(models.Model):
+    """Piece of information to be stored"""
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(default=timezone.now)
+    title = models.CharField(max_length=512)
+    text = models.TextField(max_length=16384)
+    tags = models.ManyToManyField(Tag, blank=True)
+
+    def __str__(self):
+        return f'{self.owner} - {self.title}'

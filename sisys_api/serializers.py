@@ -1,3 +1,4 @@
+from requests import request
 from rest_framework import serializers
 
 from sisys_api import models
@@ -33,3 +34,38 @@ class UserProfileSerializer(serializers.ModelSerializer):
             instance.set_password(password)
 
         return super().update(instance, validated_data)
+
+
+class TagSerializer(serializers.ModelSerializer):
+    """Serializes tag items"""
+
+    class Meta:
+        model = models.Tag
+        fields = ('id', 'text')
+        extra_kwargs = {'owner': {'read_only': True}}
+
+
+class TagCurrentUserSerializer(serializers.PrimaryKeyRelatedField):
+    """Serializer tag items by current user"""
+    def get_queryset(self):
+        request = self.context.get('request', None)
+        queryset = super(TagCurrentUserSerializer, self).get_queryset()
+        if not request or not queryset:
+            return None
+        return queryset.filter(owner=request.user)
+
+class InfoSerializer(serializers.ModelSerializer):
+    """Serializes info items"""
+
+    tags = TagCurrentUserSerializer(queryset=models.Tag.objects, many=True)
+
+    class Meta:
+        model = models.Info
+        fields = ('id',
+            'owner',
+            'created_on',
+            'updated_on',
+            'title',
+            'text',
+            'tags')
+        extra_kwargs = {'owner': {'read_only': True}}
