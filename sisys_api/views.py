@@ -2,6 +2,7 @@ from tokenize import TokenError
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
+from rest_framework import filters
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
@@ -48,6 +49,10 @@ class InfoViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.UpdateOwnInfo, IsAuthenticated)
     serializer_class = serializers.InfoSerializer
     queryset = models.Info.objects.all()
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ('title', 'text')
+    ordering_fields = ('title', 'info')
+    ordering = ('title',)
 
     def get_queryset(self):
         """User get only their own info"""
