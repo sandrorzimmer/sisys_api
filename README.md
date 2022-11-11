@@ -38,6 +38,18 @@ Thers is a second date and time field, called *updated_on*, that can be filled w
 
 1. Tag
 
-A tag can be used to categorize groups of info or to make easier looking for some kind of information. The user will choose if and how he will use it.
+A tag can be used to categorize groups of info or to make easier looking for some kind of information. Users will choose if and how they will use it.
 
-To create a tag is only necessary define the its name in a text field.
+To create a tag is only necessary define the its **name** in a text field.
+
+## API endpoints
+
+- sisys/profile
+
+
+
+- sisys/tag
+
+
+
+- sisys/info
