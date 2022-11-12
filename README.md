@@ -46,10 +46,48 @@ To create a tag is only necessary define the its **name** in a text field.
 
 - sisys/profile
 
+    - GET - Show current user profile (*id*, *email* and *name*).
 
+    - POST - Create new user profile (*email*, *name* and *password*)
 
+- sisys/profile/<profile_id>
+
+    - GET - Show a specific user profile, but only show current user profile. Any other id will return *404 - Not found*.
+
+    - PUT - update current user profile.
+
+    - PATCH - partially update current user profile.
+
+    - DELETE - delete current user profile.
+    
 - sisys/tag
 
+    - GET - show all tags from current user.
+  
+    - POST - create a new tag for current user.
 
+- sisys/tag/<tag_id>
+
+    - GET - show specific tag from current user. If tried a tag_id from other user, it will return *404 - Not found*.
+
+    - PUT - update specific tag from current user.
+
+    - PATCH - partially update specific tag from current user.
+
+    - DELETE - delete specific tag from current user.
 
 - sisys/info
+
+    - GET - show all infos from current user.
+  
+    - POST - create a new info for current user.
+
+- sisys/info/<info_id>
+
+    - GET - show specific info from current user. If tried a info_id from other user, it will return *404 - Not found*.
+
+    - PUT - update specific info from current user.
+
+    - PATCH - partially update specific info from current user.
+
+    - DELETE - delete specific info from current user.
