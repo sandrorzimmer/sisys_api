@@ -36,7 +36,7 @@ When an info is created, it has a field called *created_on* which is automatical
 
 Thers is a second date and time field, called *updated_on*, that can be filled when the user changes the info content.
 
-1. Tag
+3. Tag
 
 A tag can be used to categorize groups of info or to make easier looking for some kind of information. Users will choose if and how they will use it.
 
