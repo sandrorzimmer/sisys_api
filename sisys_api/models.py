@@ -5,7 +5,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 from django.conf import settings
 from django.utils import timezone
-from requests import request
+#from requests import request
 
 
 class UserProfileManager(BaseUserManager):

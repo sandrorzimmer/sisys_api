@@ -1,4 +1,4 @@
-from requests import request
+#from requests import request
 from rest_framework import serializers
 
 from sisys_api import models
