@@ -55,7 +55,7 @@ class InfoViewSet(viewsets.ModelViewSet):
     queryset = models.Info.objects.all()
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ('title', 'text')
-    ordering_fields = ('title', 'info')
+    ordering_fields = ('title', 'text')
     ordering = ('title',)
 
     def get_queryset(self):

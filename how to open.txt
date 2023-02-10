@@ -1,0 +1,10 @@
+- Abrir git bash
+- cd c:
+- cd projects
+- cd sisys_api
+- vagrant up
+- vagrant ssh
+- cd /vagrant
+- source ~/env/bin/activate
+- python manage.py runserver 0.0.0.0:8000
+- Open http://127.0.0.1:8000/sisys/info/
