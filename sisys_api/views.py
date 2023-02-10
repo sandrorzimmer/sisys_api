@@ -66,3 +66,5 @@ class InfoViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """Sets the owner to the logged in user"""
         serializer.save(owner=self.request.user)
+
+###        
