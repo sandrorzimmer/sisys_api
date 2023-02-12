@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters', #TEST TEST TEST
     'sisys_api',
     'rest_framework',
     'rest_framework.authtoken',

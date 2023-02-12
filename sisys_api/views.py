@@ -2,11 +2,12 @@ from tokenize import TokenError
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
-from rest_framework import filters
+#from rest_framework import filters
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 from rest_framework.permissions import IsAuthenticated
+from django_filters import rest_framework as filters
 
 from sisys_api import serializers
 from sisys_api import models
@@ -46,6 +47,14 @@ class TagViewSet(viewsets.ModelViewSet):
         """Sets the owner to the logged in user"""
         serializer.save(owner=self.request.user)
 
+class InfoFilter(filters.FilterSet):
+    class Meta:
+        model = models.Info
+        fields = {
+            'title': ['icontains'],
+            'text': ['icontains'],
+            'tags': ['exact'],
+        }
 
 class InfoViewSet(viewsets.ModelViewSet):
     """Handle creating, reading and updating info items"""
@@ -53,8 +62,11 @@ class InfoViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.UpdateOwnInfo, IsAuthenticated)
     serializer_class = serializers.InfoSerializer
     queryset = models.Info.objects.all()
-    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
-    search_fields = ('title', 'text')
+    #filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    filter_backends = (filters.DjangoFilterBackend,)
+    #filterset_fields = ['title', 'text', 'tags']
+    #search_fields = ('title', 'text')
+    filterset_class = InfoFilter
     ordering_fields = ('title', 'text')
     ordering = ('title',)
 
